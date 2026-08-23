@@ -2,6 +2,8 @@
 
 Nvidia was notified on May 30th, 2026 of several issues with the NVSmartMax service. The triage team (not Nvidia) was unable to replicate the issues, likely due to their virtualized testing environment. The issue was forwarded to Nvidia on June 24th 2026. Their first and only response was on July 1st 2026. Weeks after this initial response there was no further communication from Nvidia. As such, on July 21st, our researcher reached out asking for a status update. No further updates were provided. Our researcher reached out to them once again on August 13th notifying them of our intent to disclose the issue at the 90 day mark (August 30th) unless they provided a further update. No further update was received.
 
+This is not being publicly disclosed because Nvidia failed to fix the issue in 90 days. It is being publicly disclosed since Nvidia has not provided any update or a notice of intent to fix the issue in 2 months.
+
 In short, after Nvidia acknowledged the report on July 1st, they never responded or followed up again. Seeing as the report had been in for three months, and not hearing back after two months, we've decided to disclose some of the issues publicly.
 
 ## Limitations
