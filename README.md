@@ -1,4 +1,4 @@
-# NVSmartMax Vulnerabilities
+# Nvidia Service Vulnerabilities (NVSmartMax)
 
 Nvidia was notified on May 30th, 2026 of several issues with the NVSmartMax service. The triage team (not Nvidia) was unable to replicate the issues, likely due to their virtualized testing environment. The issue was forwarded to Nvidia on June 24th 2026. Their first and only response was on July 1st 2026. Weeks after this initial response there was no further communication from Nvidia. As such, on July 21st, our researcher reached out asking for a status update. No further updates were provided. Our researcher reached out to them once again on August 13th notifying them of our intent to disclose the issue at the 90 day mark (August 30th) unless they provided a further update. No further update was received.
 
@@ -13,6 +13,8 @@ The vulnerabilities provided are not complete, merely PoCs.
 ## Vulnerabilities TL;DR
 
 > For a more full report, see the redacted initial report which was provided to NVidia in the [Report/](Report/) folder.
+
+Upon certain display changes (such as refresh rate changes), the Nvidia service creates a section object (shared memory). The following issues are related either to the creation of the object itself, or the parsing of the data within it.
 
 ### LPE
 
@@ -30,6 +32,23 @@ With more precision, it is possible to control (and crash) individual windows. T
 
 The stability issues impact every windowed process across all sessions, not just Nvidia ones. The vulnerable DLL contains window hooks. These hooks are installed by the high integrity Nvidia services. As such, every windowed process of all integrity levels will have this vulnerable and buggy DLL injected into them by the OS. This is what allows the controlling of every window and the causation of full system instability.
 
+## Scripts
+
+Along side the PoCs are some PoC scripts. These will require the `NtObjectManager` module.
+
+* `Reset-DisplayMode.ps1` - Triggers section object creation. If this doesn't work for you, just manually change your refresh rate.
+* `Squat-NamedObject.ps1` - Creates a link to a desired location.
+* `Corrupt-NamedObject.ps1` - Requires the object to exist (run `Reset-DisplayMode.ps1`). This will write 0xFF's to the named object causing system instability.
+* `Crash-Once-NamedObject.ps1` - Requires the object to exist (run `Reset-DisplayMode.ps1`). This will cause any windowed process to crash. You'll want to reboot after this. 
+
 ## Report
 
 You can find a redacted version of the initial report which was provided to Nvidia in the [Report/](Report/) folder.
+
+## Exploitability Footnote
+
+In order to create the link, the section object cannot already exist. In our testing, the object doesn't exist at boot. The trigger for this object getting created is some form of display change such as a resolution change, addition or removal of a monitor, or a refresh rate change. We believe this is why the triage team (again, not Nvidia) were unable to reproduce this finding. In a virtualized environment the displays are dynamic. They are added, removed, and resized as you access the VM. As such, the object would already exist for them when they went to test. Our testing showed that bare-metal systems that had been in use for multiple days without rebooting did *not* have the section object created, meaning they were exploitable. As such, in real world environments this is very much an issue.
+
+This, of course, is only for the section object LPE. The crashing is still possible.
+
+Long after we had already reported the vulnerability to Nvidia we did find a way to crash the service and free the section object. This might allow for exploitation even if the object does already exist for whatever reason. However, after crashing the service we were unable to find a way to restart it (at least for the few hours we tried).
