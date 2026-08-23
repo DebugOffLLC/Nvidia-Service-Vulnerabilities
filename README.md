@@ -6,7 +6,7 @@ In short, after Nvidia acknowledged the report on July 1st, they never responded
 
 ## Limitations
 
-While our research team was able to reproduce the issues noted in this repository on several different systems, the initial triage team was not. We believe this was due to a virtualized environment. This is elaborated on more in the vulnerability writeup. Regardless, Nvidia themselves should've been able to triage it, but as far as we are aware they never even tried.
+While our research team was able to reproduce the issues noted in this repository on several different systems, the initial triage team (not Nvidia) was not. We believe this was due to a virtualized environment. This is elaborated on more in the vulnerability writeup. Regardless, Nvidia themselves should've been able to triage it, but as far as we are aware they never even tried.
 
 The vulnerabilities provided are not complete, merely PoCs.
 
