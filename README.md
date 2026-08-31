@@ -1,4 +1,4 @@
-# Nvidia Service Vulnerabilities (NVSmartMax)
+# Nvidia Service Vulnerabilities (NVSmartMax 0day)
 
 Nvidia was notified on May 30th, 2026 of several issues with the NVSmartMax service. The triage team (not Nvidia) was unable to replicate the issues, likely due to their virtualized testing environment. The issue was forwarded to Nvidia on June 24th 2026 by the triage team (not Nvidia). Nvidia's first and only response was on July 1st 2026. This response was just an internal ticket number. Weeks after this initial response there was no further communication from Nvidia. As such, on July 21st, our researcher reached out asking for a status update. No further updates were provided. Our researcher reached out to them once again on August 13th notifying them of our intent to disclose the issue at the 90 day mark (August 30th). No further update was received.
 
